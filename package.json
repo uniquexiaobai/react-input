@@ -1,6 +1,6 @@
 {
   "name": "@lokibai/react-input",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "input with compositionStart,compositionUpdate,compositionEnd for ime like Chinese input",
   "author": "@uniquexiaobai",
   "repository": "https://github.com/uniquexiaobai/react-input",
