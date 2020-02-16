@@ -7,7 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 
-var withComposition = function withComposition(WrappedComponent) {
+function withComposition(WrappedComponent) {
   var Inner = function Inner(props) {
     var _useState = React.useState(false),
         composing = _useState[0],
@@ -19,7 +19,7 @@ var withComposition = function withComposition(WrappedComponent) {
 
     var onComposition = function onComposition(e) {
       var type = e.type;
-      var value = e.target.value;
+      var value = e.currentTarget.value;
 
       if (type === 'compositionstart') {
         setComposing(true);
@@ -31,10 +31,10 @@ var withComposition = function withComposition(WrappedComponent) {
     };
 
     var onChange = function onChange(e) {
-      setText(e.target.value);
+      setText(e.currentTarget.value);
 
       if (!composing) {
-        props.onChange(e.target.value);
+        props.onChange(e.currentTarget.value);
       }
     };
 
@@ -47,7 +47,7 @@ var withComposition = function withComposition(WrappedComponent) {
   };
 
   return Inner;
-};
+}
 
 var Input =
 /*#__PURE__*/
@@ -57,12 +57,7 @@ var Textarea =
 /*#__PURE__*/
 withComposition('textarea');
 
-var Thing = function Thing() {
-  return React.createElement("div", null, "hello Input");
-};
-
 exports.Input = Input;
 exports.Textarea = Textarea;
-exports.Thing = Thing;
 exports.withComposition = withComposition;
 //# sourceMappingURL=react-input.cjs.development.js.map

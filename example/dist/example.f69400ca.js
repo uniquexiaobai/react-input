@@ -35211,7 +35211,8 @@ if ("development" === 'production') {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withComposition = exports.Thing = exports.Textarea = exports.Input = void 0;
+exports.withComposition = withComposition;
+exports.Textarea = exports.Input = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -35219,7 +35220,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var withComposition = function withComposition(WrappedComponent) {
+function withComposition(WrappedComponent) {
   var Inner = function Inner(props) {
     var _useState = (0, _react.useState)(false),
         composing = _useState[0],
@@ -35231,7 +35232,7 @@ var withComposition = function withComposition(WrappedComponent) {
 
     var onComposition = function onComposition(e) {
       var type = e.type;
-      var value = e.target.value;
+      var value = e.currentTarget.value;
 
       if (type === 'compositionstart') {
         setComposing(true);
@@ -35243,10 +35244,10 @@ var withComposition = function withComposition(WrappedComponent) {
     };
 
     var onChange = function onChange(e) {
-      setText(e.target.value);
+      setText(e.currentTarget.value);
 
       if (!composing) {
-        props.onChange(e.target.value);
+        props.onChange(e.currentTarget.value);
       }
     };
 
@@ -35259,9 +35260,8 @@ var withComposition = function withComposition(WrappedComponent) {
   };
 
   return Inner;
-};
+}
 
-exports.withComposition = withComposition;
 var Input =
 /*#__PURE__*/
 withComposition('input');
@@ -35270,12 +35270,6 @@ var Textarea =
 /*#__PURE__*/
 withComposition('textarea');
 exports.Textarea = Textarea;
-
-var Thing = function Thing() {
-  return (0, _react.createElement)("div", null, "hello Input");
-};
-
-exports.Thing = Thing;
 },{"react":"../node_modules/react/index.js"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
@@ -35334,7 +35328,7 @@ var MyTextarea = function MyTextarea() {
 };
 
 var App = function App() {
-  return React.createElement("div", null, React.createElement(_1.Thing, null), React.createElement(MyInput, null), React.createElement(MyTextarea, null));
+  return React.createElement("div", null, React.createElement(MyInput, null), React.createElement(MyTextarea, null));
 };
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
@@ -35366,7 +35360,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60577" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57440" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

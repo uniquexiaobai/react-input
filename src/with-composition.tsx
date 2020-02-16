@@ -5,13 +5,17 @@ export interface Props {
   onChange: (x: string) => void;
 }
 
-const withComposition = (WrappedComponent: any) => {
-  const Inner: React.FC<Props> = props => {
+type InputType = 'input' | 'textarea';
+
+function withComposition<T extends Props>(
+  WrappedComponent: React.ComponentType<T> | InputType
+) {
+  const Inner: React.FC<T & Props> = props => {
     const [composing, setComposing] = useState(false);
-    const [text, setText] = useState(props.value || '');
-    const onComposition = (e: any) => {
+    const [text, setText] = useState<string>(props.value || '');
+    const onComposition = (e: React.FormEvent<HTMLInputElement>) => {
       const type = e.type;
-      const value = e.target.value;
+      const value = e.currentTarget.value;
 
       if (type === 'compositionstart') {
         setComposing(true);
@@ -21,11 +25,11 @@ const withComposition = (WrappedComponent: any) => {
         props.onChange(value);
       }
     };
-    const onChange = (e: any) => {
-      setText(e.target.value);
+    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+      setText(e.currentTarget.value);
 
       if (!composing) {
-        props.onChange(e.target.value);
+        props.onChange(e.currentTarget.value);
       }
     };
 
@@ -41,6 +45,6 @@ const withComposition = (WrappedComponent: any) => {
   };
 
   return Inner;
-};
+}
 
 export default withComposition;

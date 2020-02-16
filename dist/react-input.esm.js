@@ -1,6 +1,6 @@
-import React__default, { useState, createElement } from 'react';
+import React, { useState } from 'react';
 
-var withComposition = function withComposition(WrappedComponent) {
+function withComposition(WrappedComponent) {
   var Inner = function Inner(props) {
     var _useState = useState(false),
         composing = _useState[0],
@@ -12,7 +12,7 @@ var withComposition = function withComposition(WrappedComponent) {
 
     var onComposition = function onComposition(e) {
       var type = e.type;
-      var value = e.target.value;
+      var value = e.currentTarget.value;
 
       if (type === 'compositionstart') {
         setComposing(true);
@@ -24,14 +24,14 @@ var withComposition = function withComposition(WrappedComponent) {
     };
 
     var onChange = function onChange(e) {
-      setText(e.target.value);
+      setText(e.currentTarget.value);
 
       if (!composing) {
-        props.onChange(e.target.value);
+        props.onChange(e.currentTarget.value);
       }
     };
 
-    return React__default.createElement(WrappedComponent, Object.assign({}, props, {
+    return React.createElement(WrappedComponent, Object.assign({}, props, {
       value: text,
       onChange: onChange,
       onCompositionStart: onComposition,
@@ -40,7 +40,7 @@ var withComposition = function withComposition(WrappedComponent) {
   };
 
   return Inner;
-};
+}
 
 var Input =
 /*#__PURE__*/
@@ -50,9 +50,5 @@ var Textarea =
 /*#__PURE__*/
 withComposition('textarea');
 
-var Thing = function Thing() {
-  return createElement("div", null, "hello Input");
-};
-
-export { Input, Textarea, Thing, withComposition };
+export { Input, Textarea, withComposition };
 //# sourceMappingURL=react-input.esm.js.map

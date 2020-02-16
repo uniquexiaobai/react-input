@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Thing, Input, Textarea } from '../.';
+import { Input, Textarea } from '../.';
 
 const MyInput = () => {
   const [value, setValue] = React.useState('');
@@ -26,7 +26,6 @@ const MyTextarea = () => {
 const App = () => {
   return (
     <div>
-      <Thing />
       <MyInput />
       <MyTextarea />
     </div>
